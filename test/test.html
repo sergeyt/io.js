@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Jasmine Test Runner</title>
+		<meta charset="utf-8"/>
+
+		<link rel="stylesheet" type="text/css" href="../lib/jasmine/lib/jasmine-core/jasmine.css">
+		
+		<script src="http://code.jquery.com/jquery.js"></script>
+		
+		<!-- load jasmine framework with reportes -->
+		<script src="../lib/jasmine/lib/jasmine-core/jasmine.js"></script>
+		<script src="../lib/jasmine/lib/jasmine-core/jasmine-html.js"></script>
+		
+		<!-- js scipts to test -->
+		<script src="../src/stream.js"></script>
+		
+		<!-- include test files here... -->
+		<script src="test.js"></script>
+
+		<script type="text/javascript">
+			$(function() {
+				function bind(fnthis, fn) { return function() { return fn.apply(fnthis, arguments); }; }
+
+				var jasmineEnv = jasmine.getEnv();
+				
+				// add html reporter only for local run
+				var userAgent = navigator.userAgent;
+				console.log("User agent: " + userAgent);
+				if (userAgent.toLowerCase().indexOf("phantomjs") < 0) {
+					var htmlReporter = new jasmine.HtmlReporter();
+					jasmineEnv.addReporter(htmlReporter);
+					jasmineEnv.specFilter = bind(htmlReporter, htmlReporter.specFilter);
+				}
+
+				jasmineEnv.addReporter(new jasmine.TrivialReporter());
+
+				jasmineEnv.execute();
+			});
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
