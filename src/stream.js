@@ -11,6 +11,9 @@
 /** @const */ var UTF8=10;
 
 function Stream(buffer, offset, length, le){
+	if (arguments.length <= 1) offset = 0;
+	if (arguments.length <= 2) length = buffer.byteLength;
+	if (arguments.length <= 3) le = false;
 	var start = offset;
 	var pos = offset;
 	var view = new DataView(buffer, offset, length);
@@ -19,23 +22,23 @@ function Stream(buffer, offset, length, le){
 	function readPrimitive(type){
 		switch (type){
 			case BOOL:
-				return !!view.readInt8(pos++, le);
+				return !!view.getInt8(pos++);
 			case I8:
-				return view.readInt8(pos++, le);
+				return view.getInt8(pos++);
 			case U8:
-				return view.readUint8(pos++, le);
+				return view.getUint8(pos++);
 			case I16:
-				return view.readInt16(pos+=2, le);
+				return view.getInt16(pos+=2, le);
 			case U16:
-				return view.readUint16(pos+=2, le);
+				return view.getUint16(pos+=2, le);
 			case I32:
-				return view.readInt32(pos+=4, le);
+				return view.getInt32(pos+=4, le);
 			case U32:
-				return view.readUint32(pos+=4, le);
+				return view.getUint32(pos+=4, le);
 			case FLOAT:
-				return view.readFloat32(pos+=4, le);
+				return view.getFloat32(pos+=4, le);
 			case DOUBLE:
-				return view.readFloat64(pos+=8, le);
+				return view.getFloat64(pos+=8, le);
 			case UTF8:
 				throw new Error("not implemented!");
 		}
