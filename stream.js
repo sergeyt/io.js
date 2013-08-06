@@ -53,14 +53,22 @@ function Stream(buffer, offset, length, le){
 		return readPrimitive(type);
 	};
 
+	// TODO origin parameter
+	stream.seek = function(offset) {
+		pos = offset;
+		return stream;
+	};
+
 	stream.skip = function(bytes) {
 		pos += bytes;
 		return stream;
 	};
 
 	stream.slice = function(position, size) {
-		throw Error("not implemented yet!");
+		throw NotImplemented();
 	};
+
+	function NotImplemented() { return new Error("not implemented yet!"); }
 
 	function readSeq(type) {
 		var keys = Object.keys(type);
@@ -110,7 +118,7 @@ function Stream(buffer, offset, length, le){
 			case UTF8:
 				return readUtf8();
 			case DATE:
-				throw new Error("not implemented yet!");
+				throw NotImplemented();
 		}
 		return v;
 	}
