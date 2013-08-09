@@ -34,7 +34,10 @@ function Stream(buffer, offset, length, le){
 	var start = offset;
 	var pos = offset;
 	var view = new DataView(buffer, offset, length);
-	var stream = {};
+	var stream = {
+		length: length,
+		position: function() { return pos; }
+	};
 
 	function isObject(v) { return !!(v && (typeof v == 'object')); }
 
@@ -51,6 +54,14 @@ function Stream(buffer, offset, length, le){
 	stream.read = function(type) {
 		if (isObject(type)) return readSeq(type);
 		return readPrimitive(type);
+	};
+
+	stream.readBytes = function(count) {
+		// TODO find a way to read buffer with one call
+		var bytes = new Array(count);
+		for (var i = 0; i < count; i++)
+			bytes[i] = readByte();
+		return bytes;
 	};
 
 	// TODO origin parameter
