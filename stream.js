@@ -56,6 +56,10 @@ function Stream(buffer, offset, length, le){
 		return readPrimitive(type);
 	};
 
+	stream.readByte = function() {
+		return view.getUint8(pos++);
+	};
+
 	stream.readBytes = function(count) {
 		// TODO find a way to read buffer with one call
 		var bytes = new Array(count);
@@ -76,7 +80,7 @@ function Stream(buffer, offset, length, le){
 	};
 
 	stream.slice = function(position, size) {
-		return Stream(buffer, offset + position, size, le);
+		return Stream(buffer, start + position, size, le);
 	};
 
 	function NotImplemented() { return new Error("not implemented yet!"); }
