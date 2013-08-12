@@ -29,7 +29,7 @@
 function Stream(buffer, offset, length, le){
 	if (arguments.length <= 1) offset = 0;
 	if (arguments.length <= 2) length = buffer.byteLength;
-	if (arguments.length <= 3) le = false;
+	if (arguments.length <= 3) le = true;
 
 	var start = offset;
 	var pos = offset;
