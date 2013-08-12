@@ -76,7 +76,7 @@ function Stream(buffer, offset, length, le){
 	};
 
 	stream.slice = function(position, size) {
-		throw NotImplemented();
+		return Stream(buffer, offset + position, size, le);
 	};
 
 	function NotImplemented() { return new Error("not implemented yet!"); }
