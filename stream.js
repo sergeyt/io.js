@@ -31,6 +31,9 @@ function Stream(buffer, offset, length, le){
 	if (arguments.length <= 2) length = buffer.byteLength;
 	if (arguments.length <= 3) le = true;
 
+	if (offset < 0 || offset >= buffer.byteLength)
+		throw new RangeError("Offset is out of range.");
+
 	var start = offset;
 	var pos = offset;
 	var view = new DataView(buffer, offset, length);
