@@ -8,15 +8,13 @@ function load(url, complete, progress, responseType) {
 	  progress(xhr.response, event.loaded, event.total);
 	};
   }
-  xhr.onreadystatechange = function(event) {
-	if (xhr.readyState === 4) {
-	  if (xhr.status !== 200 && xhr.status !== 0) {
-		complete(null, xhr.statusText);
-		return;
-	  }
+  xhr.onload = function(e) {
+	if (xhr.status == 200) {
 	  complete(xhr.response);
+	} else {
+	  complete(null, xhr.statusText);
 	}
-  }
+  };
   xhr.setRequestHeader("If-Modified-Since", "Fri, 01 Jan 1960 00:00:00 GMT"); // no-cache
-  xhr.send(null);
+  xhr.send();
 }
