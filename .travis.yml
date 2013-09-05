@@ -4,4 +4,5 @@ node_js:
 
 script:
   - npm test
+  - find coverage/ -name lcov.info -print
   - npm run coveralls
