@@ -28,6 +28,6 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/karma start --single-run",
-    "coveralls": "node ./node_modules/.bin/coveralls < coverage/lcov.info"
+    "coveralls": "node ./node_modules/.bin/coveralls < find coverage/ -name lcov.info"
   }
 }
