@@ -28,8 +28,8 @@ module.exports = function(config) {
     reporters: ['dots', 'coverage'],
 
     coverageReporter: {
-      type: 'html',
-      dir: 'coverage/'
+      type: 'lcovonly',
+      dir: 'coverage'
     },
 
     // web server port
