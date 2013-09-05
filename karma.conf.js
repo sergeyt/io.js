@@ -9,6 +9,10 @@ module.exports = function(config) {
     // frameworks to use
     frameworks: ['jasmine'],
 
+    preprocessors: {
+      'stream.js': 'coverage'
+    },
+
     // list of files / patterns to load in the browser
     files: [
       'lib/DataView/DataView.js',
@@ -21,7 +25,12 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress'],
+    reporters: ['dots', 'coverage'],
+
+    coverageReporter: {
+      type: 'html',
+      dir: 'coverage/'
+    },
 
     // web server port
     port: 9876,
