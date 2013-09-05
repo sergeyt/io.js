@@ -4,5 +4,5 @@ node_js:
 
 script:
   - npm test
-  - find coverage/ -name lcov.info -exec cp --target-directory=coverage {}
+  - find coverage/ -name 'lcov.info' -exec cp --target-directory=coverage {} \;
   - npm run coveralls
