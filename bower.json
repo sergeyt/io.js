@@ -7,7 +7,6 @@
     "email": "stodyshev@gmail.com"
   }],
   "dependencies": {
-    "jasmine": "latest"
   },
   "ignore": [
     "**/.*",
