@@ -3,3 +3,4 @@ obj
 lib
 node_modules
 coverage
+.coverage
