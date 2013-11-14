@@ -170,7 +170,7 @@ function Stream(buffer, offset, length, le){
 	 * And the conversion between hexadecimal and decimal? Come on, this is not a math tutorial! In case you don't know, use a calculator.
 	*/
 	function readUtf8(bytesToRead) {
-		if (arguments.length == 0) bytesToRead = -1;
+		if (arguments.length === 0) bytesToRead = -1;
 
 		var s = "";
 		var byteCount = 0;
@@ -178,9 +178,9 @@ function Stream(buffer, offset, length, le){
 		while (bytesToRead == -1 || byteCount < bytesToRead) {
 			var b0 = readByte();
 			byteCount++;
-			if (b0 == 0) break;
+			if (b0 === 0) break;
 
-			if ((b0 & 0x80) == 0) {
+			if ((b0 & 0x80) === 0) {
 				s += String.fromCharCode(b0);
 				continue;
 			}
@@ -188,30 +188,30 @@ function Stream(buffer, offset, length, le){
 			var ch;
 			var b1 = readByte();
 			byteCount++;
-			if (b1 == 0) {
+			if (b1 === 0) {
 				//Dangling lead byte, do not decompose
 				s += String.fromCharCode(b0);
 				break;
 			}
 
-			if ((b0 & 0x20) == 0) {
+			if ((b0 & 0x20) === 0) {
 				ch = String.fromCharCode(((b0 & 0x1F) << 6) | (b1 & 0x3F));
 			} else {
 				var b2 = readByte();
 				byteCount++;
-				if (b2 == 0) {
+				if (b2 === 0) {
 					//Dangling lead bytes, do not decompose
 					s += String.fromCharCode((b0 << 8) | b1);
 					break;
 				}
 
 				var ch32;
-				if ((b0 & 0x10) == 0) {
+				if ((b0 & 0x10) === 0) {
 					ch32 = ((b0 & 0x0F) << 12) | ((b1 & 0x3F) << 6) | (b2 & 0x3F);
 				} else {
 					var b3 = readByte();
 					byteCount++;
-					if (b3 == 0) {
+					if (b3 === 0) {
 						s += String.fromCharCode((b0 << 8) | b1);
 						s += String.fromCharCode(b2);
 						break;
@@ -222,7 +222,7 @@ function Stream(buffer, offset, length, le){
 							| (b3 & 0x3F);
 				}
 
-				if ((ch32 & 0xFFFF0000) == 0) {
+				if ((ch32 & 0xFFFF0000) === 0) {
 					ch = String.fromCharCode(ch32);
 				} else {
 					//break up into UTF16 surrogate pair

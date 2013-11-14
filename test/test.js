@@ -1,4 +1,5 @@
 describe("io.js tests", function() {
+
 	function hex(c) {
 		c = c.toLowerCase();
 		c = c.charCodeAt(0);
@@ -11,8 +12,8 @@ describe("io.js tests", function() {
 	function buffer(bytes) {
 		if (typeof bytes == 'string') {
 			var arr = [];
-			for (var i = 0; i+1 < bytes.length; i+=2) {
-				var b = hex(bytes.charAt(i)) << 4 | hex(bytes.charAt(i+1));
+			for (var i = 0; i + 1 < bytes.length; i += 2) {
+				var b = hex(bytes.charAt(i)) << 4 | hex(bytes.charAt(i + 1));
 				arr.push(b);
 			}
 			bytes = arr;
@@ -23,12 +24,13 @@ describe("io.js tests", function() {
 	it("stream.read(BOOL)", function() {
 		var arr = [0, 1, 0, 2, 0];
 		var s = Stream(buffer(arr));
-		for (var i = 0; i < arr.length; i++)
-			expect(s.read(BOOL)).toEqual(arr[i] != 0);
+		for (var i = 0; i < arr.length; i++) {
+			expect(s.read(BOOL)).toEqual(arr[i] !== 0);
+		}
 	});
 
 	it("stream.read(I8)", function() {
-		var arr = [-1,-2,3,4,5];
+		var arr = [-1, -2, 3, 4, 5];
 		var s = Stream(buffer(arr));
 		for (var i = 0; i < arr.length; i++)
 			expect(s.read(I8)).toEqual(arr[i]);
